@@ -54,10 +54,14 @@
     layer.bindPopup(feature.properties.name + "<br>" + feature.properties.html);
   };
   
-var OpenStreetMap_BlackAndWhite = L.tileLayer('https://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
-	maxZoom: 18,
-	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-});
+L.mapbox.accessToken = 'pk.eyJ1Ijoic251ZmtpbiIsImEiOiJjajd0ZWpmZzQzZ3EyMzJvNm1rYmkyc2gyIn0.W4zSFrUZBuHtVxqTBqtZjQ';
+var map = L.mapbox.map('map')
+    .setView([38.97416, -95.23252], 15);
+
+// Add tiles from the Mapbox Static API tiles endpoint
+// (https://www.mapbox.com/api-documentation/#retrieve-raster-tiles-from-styles)
+// Tiles are 512x512 pixels and are offset by 1 zoom level
+L.mapbox.styleLayer('mapbox://styles/mapbox/emerald-v8').addTo(map);
 
 //get geojson
 	$.getJSON("sounds.geojson", function(data) {
@@ -68,14 +72,6 @@ var OpenStreetMap_BlackAndWhite = L.tileLayer('https://{s}.tiles.wmflabs.org/bw-
 			}
 		}).addTo(map);
 });
-
- /* var soundLayer = L.GeoJSON("sounds.geojson", {
-    onEachFeature: onEachAudio,
-    pointToLayer: function(feature, latlng) {
-      return L.marker(latlng, {icon: audioIcon});
-    }
-  }).addTo(map);*/
-
 
 </script>
 
