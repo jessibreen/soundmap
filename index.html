@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+  <title>Audio Demo</title>
+
+  <!-- Mapbox js -->
+		<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
+
+		<!-- Mapbox stylesheet -->
+		<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+		<!-- JQuery -->
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+		<!-- Latest compiled and minified Bootstrap -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	
+		<!-- Stamen Tiles -->
+		<script src="http://maps.stamen.com/js/tile.stamen.js"></script>
+
+ <style>
+  html {
+    height: 100%;
+  }
+  body {
+    height: 100%;
+  }
+  #map {
+    height: 95%;
+  }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+<script type="text/javascript">
+  var map = L.map('map').setView([34, -100], 4);
+  var audioIcon = L.icon({
+    iconUrl: 'audio.png',
+    iconSize: [32, 37],
+    shadowSize: [0, 0],
+    iconAnchor: [16, 37],
+    shadowAnchor: [0, 0],
+    popupAnchor: [0, -37]
+  });
+  function onEachAudio(feature, layer) {
+    layer.bindPopup(feature.properties.name + "<br>" + feature.properties.html);
+  };
+  
+var OpenStreetMap_BlackAndWhite = L.tileLayer('https://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+	maxZoom: 18,
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+});
+
+//get geojson
+	$.getJSON("sounds.geojson", function(data) {
+		var geojson = L.geoJson(data, {
+			onEachFeature: onEachAudio,
+			pointToLayer: function (feature, latlng) {
+				return L.marker(latlng, {icon: audioIcon});
+			}
+		}).addTo(map);
+});
+
+ /* var soundLayer = L.GeoJSON("sounds.geojson", {
+    onEachFeature: onEachAudio,
+    pointToLayer: function(feature, latlng) {
+      return L.marker(latlng, {icon: audioIcon});
+    }
+  }).addTo(map);*/
+
+
+</script>
+
+
+
+</body>
+</html>
