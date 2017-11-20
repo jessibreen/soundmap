@@ -4,11 +4,9 @@
 <head>
   <title>Audio Demo</title>
 
-  <!-- Mapbox js -->
-		<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
-
-		<!-- Mapbox stylesheet -->
-		<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
+  		<!-- Mapbox js -->
+		<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+		<link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
 
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -22,8 +20,6 @@
 		<!-- Latest compiled and minified Bootstrap -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	
-		<!-- Stamen Tiles -->
-		<script src="https://maps.stamen.com/js/tile.stamen.js"></script>
 
  <style>
   html {
@@ -64,7 +60,7 @@ L.mapbox.styleLayer('mapbox://styles/snufkin/cja8lbw0u0opi2spbl45158m0').addTo(m
   function onEachAudio(feature, layer) {
     layer.bindPopup(feature.properties.name + "<br>" + feature.properties.html);
   };
-  
+
 //get geojson
 	$.getJSON("sounds.geojson", function(data) {
 		var geojson = L.geoJson(data, {
