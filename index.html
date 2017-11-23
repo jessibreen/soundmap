@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <html>
 <head>
-  <title>Audio Demo</title>
+  <title>soundmap</title>
 
   		<!-- Mapbox js -->
 		<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
@@ -44,9 +44,6 @@ L.mapbox.accessToken = 'pk.eyJ1Ijoic251ZmtpbiIsImEiOiJjajd0ZWpmZzQzZ3EyMzJvNm1rY
 var map = L.mapbox.map('map')
     .setView([32, -79.5], 16);
 
-// Add tiles from the Mapbox Static API tiles endpoint
-// (https://www.mapbox.com/api-documentation/#retrieve-raster-tiles-from-styles)
-// Tiles are 512x512 pixels and are offset by 1 zoom level
 L.mapbox.styleLayer('mapbox://styles/snufkin/cja8lbw0u0opi2spbl45158m0').addTo(map);
 
   var audioIcon = L.icon({
